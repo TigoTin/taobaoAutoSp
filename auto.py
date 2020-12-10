@@ -136,7 +136,7 @@ if __name__ == '__main__':
     #windows
     #driver = webdriver.Chrome(executable_path='chromedriver.exe', chrome_options=option)
     #linux
-    driver = webdriver.Chrome(executable_path='./chromedriver', chrome_options=option)
+    driver = webdriver.Chrome(executable_path='assets/chromedriver', chrome_options=option)
     driver.maximize_window()
     print("chrome浏览器已经打开...")
 
