@@ -15,28 +15,11 @@ import datetime
 import time
 import random
 
-# ==== 设定抢购时间 （修改此处，指定抢购时间点）====
-BUY_TIME = "2020-12-10 16:00:00"
-
 # ====  标识登录状态、重试次数 ====
 MAX_LOGIN_RETRY_TIMES = 2
 
 current_retry_login_times = 0
 login_success = False
-buy_time_object = datetime.datetime.strptime(BUY_TIME, '%Y-%m-%d %H:%M:%S')
-
-now_time = datetime.datetime.now()
-if now_time > buy_time_object:
-    print("当前已过抢购时间，请确认抢购时间是否填错...")
-    exit(0)
-
-print("正在打开chrome浏览器...")
-# 让浏览器不要显示当前受自动化测试工具控制的提醒
-option = webdriver.ChromeOptions()
-option.add_argument('disable-infobars')
-driver = webdriver.Chrome(executable_path='./chromedriver', chrome_options=option)
-driver.maximize_window()
-print("chrome浏览器已经打开...")
 
 
 def __login_operates():
@@ -148,6 +131,28 @@ def buy():
         time.sleep(0.5)
 
 
-login()
-keep_login_and_wait()
-buy()
+if __name__ == '__main__':
+    # ==== 设定抢购时间 （修改此处，指定抢购时间点）====
+    cur_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    BUY_TIME = input(f"请输入抢购时间，格式如 {cur_time} :\n")
+    buy_time_object = datetime.datetime.strptime(BUY_TIME, '%Y-%m-%d %H:%M:%S')
+    print(f"已设置抢购时间为：{buy_time_object}")
+    now_time = datetime.datetime.now()
+    if now_time > buy_time_object:
+        print("当前已过抢购时间，请确认抢购时间是否填错...")
+        exit(0)
+
+    print("正在打开chrome浏览器...")
+    # 让浏览器不要显示当前受自动化测试工具控制的提醒
+    option = webdriver.ChromeOptions()
+    option.add_argument('disable-infobars')
+    #windows
+    #driver = webdriver.Chrome(executable_path='chromedriver.exe', chrome_options=option)
+    #linux
+    driver = webdriver.Chrome(executable_path='./chromedriver', chrome_options=option)
+    driver.maximize_window()
+    print("chrome浏览器已经打开...")
+
+    login()
+    keep_login_and_wait()
+    buy()
