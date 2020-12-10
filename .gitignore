@@ -1,2 +1,6 @@
 .idea
 assets
+auto.spec
+dist
+build
+__pycache__
