@@ -6,7 +6,7 @@
 
 **如果版本不对应请自行下载并替换**
 
-==》[传送门](https://sites.google.com/a/chromium.org/chromedriver/downloads)
+==》[传送门](https://sites.google.com/chromium.org/driver)
 
 ## 注意事项
 1. 购物车请清除其他商品
